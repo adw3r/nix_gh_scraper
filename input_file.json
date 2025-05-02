@@ -1,0 +1,12 @@
+{
+  "keywords": [
+    "openstack",
+    "nova",
+    "css"
+  ],
+  "proxies": [
+    "socks5://uiZfffH0iTzj7fEN:mobile;in;;;@proxy.froxy.com:9168",
+    "socks5://uiZfffH0iTzj7fEN:mobile;in;;;@proxy.froxy.com:9163"
+  ],
+  "type": "Repositories"
+}
