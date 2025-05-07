@@ -25,8 +25,8 @@ Script requires full path to the input file. The structure of the input_file.jso
     "css"
   ],
   "proxies": [
-    "eu3030339:hKjxGgrgkt@194.61.9.17:7952",
-    "eu3030339:hKjxGgrgkt@46.8.202.81:7952"
+    "socks5://uiZfffH0iTzj7fEN:mobile;in;;;@proxy.froxy.com:9168",
+    "socks5://uiZfffH0iTzj7fEN:mobile;in;;;@proxy.froxy.com:9168"
   ],
   "type": "Repositories"
 }
