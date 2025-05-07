@@ -1,10 +1,10 @@
 import argparse
 import asyncio
 
-from src import utils
-from src.log import logger
-from src.parsers import retrieve_info
-from src.utils import create_args
+from nix_scraper import utils
+from nix_scraper.log import logger
+from nix_scraper.parsers import retrieve_info
+from nix_scraper.utils import create_args
 
 
 async def main():

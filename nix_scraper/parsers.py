@@ -6,9 +6,9 @@ from concurrent.futures import ThreadPoolExecutor
 import bs4
 import curl_cffi
 
-from src import schemas
-from src.log import logger
-from src.serializers import Serializer
+from nix_scraper import schemas
+from nix_scraper.log import logger
+from nix_scraper.serializers import Serializer
 
 REQUEST_HEADERS = {
     'authority': 'github.com',
@@ -52,13 +52,6 @@ def simple_format_urls(urls: typing.Sequence) -> list[dict]:
     ]
 
 
-def get_extras(parser, urls) -> list[curl_cffi.Response]:
-    with ThreadPoolExecutor(max_workers=len(urls)) as pool:
-        results = pool.map(parser.check_extras, urls)
-    res = list(results)
-    return res
-
-
 
 def extras_format_urls(results: list[curl_cffi.Response]) -> list[dict]:
     data = []
@@ -98,10 +91,10 @@ async def retrieve_info(input_data: dict) -> list[dict]:
     )
     logger.info(f'{searching_page_response = }')
     urls: list[str] = Serializer.extract_urls(searching_page_response.text)
-    if input_data.type == 'repositories':
+    if input_data.type.lower() == 'repositories':
         tasks = [parser.check_extras(url) for url in urls]
         results: list[curl_cffi.Response] = await asyncio.gather(*tasks)
         if not results:
-            raise Exception(results)
+            raise Exception(f'check_extras method can`t give empty results with given {input_data = }')
         return extras_format_urls(results=results)
     return simple_format_urls(urls)

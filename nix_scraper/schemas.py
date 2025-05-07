@@ -1,4 +1,4 @@
-from src.log import logger
+from nix_scraper.log import logger
 from concurrent.futures import ThreadPoolExecutor
 
 import httpx
