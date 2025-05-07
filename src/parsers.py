@@ -8,6 +8,7 @@ import curl_cffi
 
 from src import schemas
 from src.log import logger
+from src.serializers import Serializer
 
 REQUEST_HEADERS = {
     'authority': 'github.com',
@@ -30,7 +31,7 @@ REQUEST_HEADERS = {
 }
 
 
-class GitParser:
+class GitScraper:
     def __init__(self, session: curl_cffi.AsyncSession):
         self.session = session
 
@@ -44,18 +45,6 @@ class GitParser:
     async def check_extras(self, url: str) -> curl_cffi.Response:
         response = await self.session.get(url, headers=REQUEST_HEADERS)
         return response
-
-class Serializer:
-
-    @staticmethod
-    def extract_urls(html: str) -> list[str]:
-        soup = bs4.BeautifulSoup(html, 'lxml')
-        rows = soup.find_all('div', {'class': 'search-title'})
-        return [f'https://github.com{i.find("a")["href"]}' for i in rows]
-
-    @staticmethod
-    def extract_owner(url) -> str:
-        return url.removeprefix('https://github.com/').split('/')[0]
 
 def simple_format_urls(urls: typing.Sequence) -> list[dict]:
     return [
@@ -102,7 +91,7 @@ async def retrieve_info(input_data: dict) -> list[dict]:
 
     proxy: str = random.choice(input_data.proxies)
     session = curl_cffi.AsyncSession(proxy=proxy)
-    parser = GitParser(session)
+    parser = GitScraper(session)
 
     searching_page_response: curl_cffi.Response = await parser.get_searching_page(
         input_data.type, ' '.join(input_data.keywords)
