@@ -12,8 +12,8 @@ def get_data(file_path: str | Path) -> dict:
 
 def create_args() -> argparse.Namespace:
     argument_parser = ArgumentParser()
-    argument_parser.add_argument('--file', '-f')
+    argument_parser.add_argument("--file", "-f")
     args = argument_parser.parse_args()
     if not args.file:
-        raise FileNotFoundError('Input file can`t be empty!')
+        raise FileNotFoundError("Input file can`t be empty!")
     return args
