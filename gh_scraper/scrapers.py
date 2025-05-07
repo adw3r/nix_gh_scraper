@@ -5,9 +5,9 @@ import typing
 import bs4
 import curl_cffi
 
-from nix_scraper import schemas
-from nix_scraper.log import logger
-from nix_scraper.serializers import Serializer
+from gh_scraper import schemas
+from gh_scraper.log import logger
+from gh_scraper.serializers import Serializer
 
 REQUEST_HEADERS = {
     "authority": "github.com",

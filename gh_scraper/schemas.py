@@ -4,7 +4,7 @@ from urllib.parse import urlparse, urlunparse
 import httpx
 from pydantic import BaseModel, field_validator
 
-from nix_scraper.log import logger
+from gh_scraper.log import logger
 
 PROXY_PROTOCOLS = ("http://", "https://", "socks5://", "socks4://")
 SEARCHING_TYPES = ("Repositories", "Issues", "Wikis")

@@ -3,7 +3,7 @@ import sys
 
 from loguru import logger
 
-from nix_scraper import config
+from gh_scraper import config
 
 logger.remove()
 logging.disable()
